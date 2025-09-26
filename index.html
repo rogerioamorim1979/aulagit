@@ -1,12 +1,703 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rogerio Amorim Gomes - Portfólio</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --accent-color: #20c997;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar customizado */
+        .navbar-custom {
+            background: rgba(13, 110, 253, 0.95) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-custom.scrolled {
+            background: rgba(13, 110, 253, 0.98) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0d6efd 0%, #20c997 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23fff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23fff" stop-opacity="0"/></radialGradient></defs><circle cx="10" cy="10" r="10" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0 0; 90 0; 0 0" dur="10s" repeatCount="indefinite"/></circle></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .lead {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .btn-hero {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Profile Image */
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 8px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--dark-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card-custom {
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Skills */
+        .skill-item {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-item i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Progress bars */
+        .progress-custom {
+            height: 25px;
+            border-radius: 15px;
+            background: rgba(13, 110, 253, 0.1);
+            overflow: hidden;
+        }
+
+        .progress-bar-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 15px;
+            transition: width 2s ease;
+        }
+
+        /* Projects */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(32, 201, 151, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        /* Contact */
+        .contact-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .contact-item i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Typing effect */
+        .typing {
+            overflow: hidden;
+            border-right: 3px solid rgba(255,255,255,.75);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.1em;
+            animation: blink-caret 1s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(255,255,255,.75); }
+        }
+    </style>
 </head>
 <body>
-    <h1> ROGERIO AMORIM GOMES </h1>
-    
-</body>
-</html>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Rogerio Amorim Gomes</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Habilidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projetos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="hero-content text-white">
+                        <h1>Olá, eu sou <br><span class="typing">Rogerio Amorim Gomes</span></h1>
+                        <p class="lead">Desenvolvedor Full Stack & Designer</p>
+                        <p class="mb-4">Criando soluções digitais inovadoras com paixão e dedicação. Especialista em desenvolvimento web e mobile com foco na experiência do usuário.</p>
+                        <a href="#about" class="btn btn-light btn-hero me-3">Sobre Mim</a>
+                        <a href="#projects" class="btn btn-outline-light btn-hero">Ver Projetos</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center" data-aos="fade-left">
+                    <div class="profile-img bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-person-circle display-1 text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Sobre Mim</h2>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h3 class="mb-4">Desenvolvedor Apaixonado por Tecnologia</h3>
+                    <p class="lead">Com mais de 5 anos de experiência em desenvolvimento web e mobile, tenho a missão de transformar ideias em realidade digital.</p>
+                    <p>Especializado em tecnologias modernas como React, Node.js, Python e outras ferramentas que permitem criar aplicações robustas e escaláveis. Sempre busco me manter atualizado com as últimas tendências do mercado.</p>
+                    <p>Minha paixão é resolver problemas complexos através de código limpo e eficiente, sempre priorizando a experiência do usuário e a performance das aplicações.</p>
+                    <a href="#contact" class="btn btn-primary btn-lg">Entre em Contato</a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card card-custom h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-award display-4 text-primary mb-3"></i>
+                                    <h5>5+ Anos</h5>
+                                    <p class="text-muted">Experiência</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card card-custom h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-code-slash display-4 text-success mb-3"></i>
+                                    <h5>50+ Projetos</h5>
+                                    <p class="text-muted">Concluídos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card card-custom h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-people display-4 text-warning mb-3"></i>
+                                    <h5>30+ Clientes</h5>
+                                    <p class="text-muted">Satisfeitos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card card-custom h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-cup-hot display-4 text-danger mb-3"></i>
+                                    <h5>1000+ Cafés</h5>
+                                    <p class="text-muted">Consumidos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Minhas Habilidades</h2>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-item">
+                        <i class="bi bi-code-slash"></i>
+                        <h5>Frontend</h5>
+                        <p>React, Vue.js, Angular</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-item">
+                        <i class="bi bi-server"></i>
+                        <h5>Backend</h5>
+                        <p>Node.js, Python, PHP</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-item">
+                        <i class="bi bi-database"></i>
+                        <h5>Database</h5>
+                        <p>MySQL, MongoDB, PostgreSQL</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="skill-item">
+                        <i class="bi bi-phone"></i>
+                        <h5>Mobile</h5>
+                        <p>React Native, Flutter</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bars -->
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress progress-custom">
+                            <div class="progress-bar progress-bar-custom" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Python</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress progress-custom">
+                            <div class="progress-bar progress-bar-custom" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>React</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress progress-custom">
+                            <div class="progress-bar progress-bar-custom" data-width="88"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Node.js</span>
+                            <span>82%</span>
+                        </div>
+                        <div class="progress progress-custom">
+                            <div class="progress-bar progress-bar-custom" data-width="82"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Database</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress progress-custom">
+                            <div class="progress-bar progress-bar-custom" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>UI/UX Design</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress progress-custom">
+                            <div class="progress-bar progress-bar-custom" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Meus Projetos</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card">
+                        <div class="bg-primary" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-shop display-1 text-white"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="text-center text-white">
+                                <h5>E-commerce Platform</h5>
+                                <p>Plataforma completa de e-commerce</p>
+                                <a href="#" class="btn btn-light">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card">
+                        <div class="bg-success" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-phone display-1 text-white"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="text-center text-white">
+                                <h5>App Mobile</h5>
+                                <p>Aplicativo móvel para delivery</p>
+                                <a href="#" class="btn btn-light">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card">
+                        <div class="bg-warning" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-graph-up display-1 text-white"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="text-center text-white">
+                                <h5>Dashboard Analytics</h5>
+                                <p>Sistema de análise de dados</p>
+                                <a href="#" class="btn btn-light">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card">
+                        <div class="bg-danger" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-chat-dots display-1 text-white"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="text-center text-white">
+                                <h5>Chat App</h5>
+                                <p>Aplicativo de mensagens em tempo real</p>
+                                <a href="#" class="btn btn-light">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-card">
+                        <div class="bg-info" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-calendar-event display-1 text-white"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="text-center text-white">
+                                <h5>Task Manager</h5>
+                                <p>Sistema de gerenciamento de tarefas</p>
+                                <a href="#" class="btn btn-light">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="project-card">
+                        <div class="bg-dark" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-globe display-1 text-white"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="text-center text-white">
+                                <h5>Corporate Website</h5>
+                                <p>Site institucional responsivo</p>
+                                <a href="#" class="btn btn-light">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Entre em Contato</h2>
+                    <p class="lead mb-5" data-aos="fade-up">Vamos trabalhar juntos? Entre em contato comigo!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-item">
+                        <i class="bi bi-envelope"></i>
+                        <h5>Email</h5>
+                        <p>rogerio.amorim@email.com</p>
+                        <a href="mailto:rogerio.amorim@email.com" class="btn btn-primary">Enviar Email</a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-item">
+                        <i class="bi bi-phone"></i>
+                        <h5>Telefone</h5>
+                        <p>+55 (11) 99999-9999</p>
+                        <a href="tel:+5511999999999" class="btn btn-success">Ligar Agora</a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-item">
+                        <i class="bi bi-linkedin"></i>
+                        <h5>LinkedIn</h5>
+                        <p>linkedin.com/in/rogerio-amorim</p>
+                        <a href="#" class="btn btn-info">Ver Perfil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h5 class="mb-4">Rogerio Amorim Gomes</h5>
+                    <div class="social-links mb-4">
+                        <a href="#"><i class="bi bi-github"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                    <p>&copy; 2024 Rogerio Amorim Gomes. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector
